@@ -54,7 +54,8 @@ public class RestResource extends ServerResource {
 	}
 
 	/*
-	 * Takes the first value on the request path as the parameter for the repo query
+	 * Takes the first value on the request path as the parameter for the repo
+	 * query
 	 */
 	private String parseReference() {
 
@@ -110,7 +111,9 @@ public class RestResource extends ServerResource {
 				for (JsonValue repo : repos) {
 
 					JsonObject reportAsObject = (JsonObject) repo;
-					sizeMap.put(reportAsObject.getInt("size"), reportAsObject.getString("name"));
+					if (!reportAsObject.getBoolean("private")) {
+						sizeMap.put(reportAsObject.getInt("size"), reportAsObject.getString("name"));
+					}
 				}
 			}
 
